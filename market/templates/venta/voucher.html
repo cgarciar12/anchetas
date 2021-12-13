@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .table {
+            border: 1px solid #424242;
+            padding: 2px;
+            width: max-content;
+        }
+        .tr {
+          border: 1px solid #424242;
+          padding: 5px;
+          text-align: center;
+          
+        }
+      </style>
+</head>
+<body>
+        <h1 style="text-align: center; font-size: 30px;"> ANCHETAS GARCIA</h1>
+        <h2 style="text-align: center;"> Celular : 3167578718 - 31233741362</h3>
+        <h2 style="text-align: center;"> Direccion : Av 39 # 63a - 07 Barrio la Esperanza</h3>
+    <table class="table">
+        <tr>
+            <td style="font-weight: bold;">Factura:</td><td>{{venta.id}}</td>
+            <td style="font-weight: bold;">Fecha:</td><td>{{venta.date_sale}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">Cantidad de Productos:</td><td>{{venta.count}}</td>
+            <td style="font-weight: bold;">Monto Pagado:</td><td>{{venta.amount}}</td>
+        </tr>
+        <tr>
+            <td style="font-weight: bold;">Tipo de Pago:</td><td>{{venta.get_type_invoce_display}}</td>
+        </tr>
+    </table>
+    <br>
+
+    <h4>Poductos comprados:</h4>
+    <table class="table">
+        <thead>
+            <th style="font-weight: bold;">Nombre del producto</th>
+            <th style="font-weight: bold;">Cantidad</th>
+            <th style="font-weight: bold;">Precio</th>
+            <th style="font-weight: bold;">Descripcion</th>
+        </thead>
+        <tbody>
+            {% for producto in detalle_productos %}
+            <tr class="tr">
+                <td>{{ producto.product.name }}</td>
+                <td>{{ producto.count }}</td>
+                <td>{{ producto.price_sale }}</td>
+                <td>{{ producto.product.description }}</td>
+            </tr>
+            {% empty %}
+            <p>No hay ventas para este producto</p>
+            {% endfor %}
+        </tbody>
+      </table>
+</body>
+</html>
